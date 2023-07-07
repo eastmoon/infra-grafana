@@ -14,6 +14,13 @@ Centralize the analysis, visualization, and alerting for all of your data with G
 + Enterprise
 Grafana’s powerful visualization and alerting, enhanced with access to Enterprise data source plugins and built-in collaboration features. For organizations that have specific privacy or security requirements and need a self-managed environment.
   - Grafana Enterprise is a commercial edition of Grafana that includes additional features not found in the open source version.
+      + Role-based access control to control access with role-based permissions.
+      + Data source permissions to restrict query access to specific teams and users.
+      + Reporting to generate a PDF report from any dashboard and set up a schedule to have it emailed to whomever you choose.
+      + Custom branding to customize Grafana from the brand and logo to the footer links.
+      + Usage insights to understand how your Grafana instance is used.
+      + Recorded queries to see trends over time for your data sources.
+      + etc [...](https://www.fosstechnix.com/introduction-to-grafana-what-is-grafana/#grafana-enterprise-features)
   - Building on everything you already know and love about Grafana open source, Grafana Enterprise includes exclusive datasource plugins and additional features.
 
 + Cloud
@@ -40,6 +47,9 @@ Offered as a fully managed service, Grafana Cloud is the fastest way to adopt Gr
 + [Grafana](https://grafana.com/)
     - [Grafana Document](https://grafana.com/docs/grafana/latest/)
     - [Grafana Docker image](https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker/)
+    - License
+        + [Grafana Enterprise license](https://grafana.com/docs/grafana/latest/administration/enterprise-licensing/)
+        + [Grafana Cloud Pricing](https://grafana.com/pricing/)
 + Grafana Ecosystem
     - [Agent](https://grafana.com/docs/agent/latest/)
         + [Visualization and monitoring solutions](https://grafana.com/solutions/?plcmt=nav-solutions-cta1)
