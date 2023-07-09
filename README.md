@@ -32,6 +32,30 @@ Offered as a fully managed service, Grafana Cloud is the fastest way to adopt Gr
 
 詳細文獻參閱 [Startup Grafana](./docs/startup-grafana.md)。
 
++ 啟動
+
+使用 CLI 呼叫 docker-compose 來啟動相關服務
+
+```
+grafana up
+```
+
++ 關閉
+
+使用 CLI 呼叫 docker-compose 來關閉相關服務
+
+```
+grafana down
+```
+
++ 進入
+
+使用 CLI 進入目標容器內來操作相關服務的命令
+
+```
+grafana into
+```
+
 ### [Dashboards](https://grafana.com/docs/grafana/latest/dashboards/?pg=hp&plcmt=lt-box-dashboards)
 
 ### [Plugins](https://grafana.com/docs/grafana/latest/administration/plugin-management/?pg=hp&plcmt=lt-box-plugins)
