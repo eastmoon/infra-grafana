@@ -132,6 +132,7 @@ goto end
     echo Command:
     echo      up                Startup Server.
     echo      down              Close down Server.
+    echo      into              Into Server.
     echo.
     echo Run 'cli [COMMAND] --help' for more information on a command.
     goto end
@@ -174,6 +175,26 @@ goto end
 :cli-up-help
     echo This is a Command Line Interface with project %PROJECT_NAME%
     echo Startup Server
+    echo.
+    echo Command:
+    echo      demo              Show demo info.
+    echo Options:
+    echo      --help, -h        Show more information with UP Command.
+    goto end
+
+@rem ------------------- Command "into" method -------------------
+
+:cli-into
+    echo ^> Into Grafana : docker-grafana_%PROJECT_NAME%
+    docker exec -ti docker-grafana_%PROJECT_NAME% bash
+    goto end
+
+:cli-into-args
+    goto end
+
+:cli-into-help
+    echo This is a Command Line Interface with project %PROJECT_NAME%
+    echo Into Server
     echo.
     echo Command:
     echo      demo              Show demo info.
