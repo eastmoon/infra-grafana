@@ -1,0 +1,21 @@
+# Docker-Compose document
+# Ref : https://docs.docker.com/compose/compose-file/
+
+version: "3.8"
+services:
+  grafana:
+    image: grafana/grafana-enterprise
+    container_name: docker-grafana_${PROJECT_NAME}
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    networks:
+      - bisa
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - ${GF_DATA_VOLUME}:/var/lib/grafana
+
+networks:
+  bisa:
+    driver: bridge
