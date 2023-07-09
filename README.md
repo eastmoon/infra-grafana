@@ -56,9 +56,20 @@ grafana down
 grafana into
 ```
 
++ 設定管理資訊?
+
 ### [Dashboards](https://grafana.com/docs/grafana/latest/dashboards/?pg=hp&plcmt=lt-box-dashboards)
 
++ 啟用、刪除、匯出、匯入?
++ 編輯模式 ( Edit )?
++ 觀賞模式 ( View )?
+
 ### [Plugins](https://grafana.com/docs/grafana/latest/administration/plugin-management/?pg=hp&plcmt=lt-box-plugins)
+
+透過 CLI 下載的 Plugin 物件，可以觀察到是一組經過編譯處裡的前端專案，以 grafana-clock-panel 為例，其內容是運用 react 專案脫水後壓制入 module.js 檔案。
+
++ 匯入方式?
++ Plugin 專案? 設計? 編譯?
 
 ### [Alerts](https://grafana.com/docs/grafana/latest/alerting/?pg=hp&plcmt=lt-box-alerts)
 
