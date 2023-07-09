@@ -30,6 +30,8 @@ Offered as a fully managed service, Grafana Cloud is the fastest way to adopt Gr
 
 ### Startup
 
+詳細文獻參閱 [Startup Grafana](./docs/startup-grafana.md)。
+
 ### [Dashboards](https://grafana.com/docs/grafana/latest/dashboards/?pg=hp&plcmt=lt-box-dashboards)
 
 ### [Plugins](https://grafana.com/docs/grafana/latest/administration/plugin-management/?pg=hp&plcmt=lt-box-plugins)
@@ -46,7 +48,6 @@ Offered as a fully managed service, Grafana Cloud is the fastest way to adopt Gr
 
 + [Grafana](https://grafana.com/)
     - [Grafana Document](https://grafana.com/docs/grafana/latest/)
-    - [Grafana Docker image](https://grafana.com/docs/grafana/latest/setup-grafana/installation/docker/)
     - License
         + [Grafana Enterprise license](https://grafana.com/docs/grafana/latest/administration/enterprise-licensing/)
         + [Grafana Cloud Pricing](https://grafana.com/pricing/)
