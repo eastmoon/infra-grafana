@@ -47,9 +47,8 @@ for %%a in ("%cd%") do (
     set PROJECT_NAME=%%~na
 )
 set PROJECT_ENV=dev
-set VARNUMBER1=0
-set VARNUMBER2=0
-set VARTEST=0
+set CONF_FILE_PATH=.\conf\docker\.env
+set GF_VERSION=oss
 
 @rem ------------------- execute script -------------------
 
@@ -116,9 +115,6 @@ goto end
     goto cli-help
 
 :cli-args
-    set COMMON_ARGS_KEY=%1
-    set COMMON_ARGS_VALUE=%2
-    if "%COMMON_ARGS_KEY%"=="--prod" (set PROJECT_ENV=prod)
     goto end
 
 :cli-help
@@ -127,7 +123,6 @@ goto end
     echo.
     echo Options:
     echo      --help, -h        Show more information with CLI.
-    echo      --prod            Setting project environment with "prod", default is "dev"
     echo.
     echo Command:
     echo      up                Startup Server.
@@ -141,12 +136,12 @@ goto end
 
 :cli-up-docker-prepare (
     @rem Create .env for compose
-    set CONF_FILE_PATH=./conf/docker/.env
     echo Current Environment %PROJECT_ENV%
     echo PROJECT_NAME=%PROJECT_NAME% > %CONF_FILE_PATH%
+    echo GF_VERSION=%GF_VERSION% >> %CONF_FILE_PATH%
 
     echo ^> Build Docker images
-    set TARGET_DIR=%CLI_DIRECTORY%\cache\grafana-data
+    set TARGET_DIR=%CLI_DIRECTORY%\cache\grafana-data-%GF_VERSION%
     IF NOT EXIST %TARGET_DIR% (
         mkdir %TARGET_DIR%
     )
@@ -163,13 +158,13 @@ goto end
     call :cli-up-docker-prepare
 
     @rem Run next deveopment with stdout
-    docker-compose -f ./conf/docker/docker-compose.yml --env-file ./conf/docker/.env up -d
+    docker-compose -f .\conf\docker\docker-compose-%GF_VERSION%.yml --env-file %CONF_FILE_PATH% up -d
     goto end
 
 :cli-up-args
     set COMMON_ARGS_KEY=%1
     set COMMON_ARGS_VALUE=%2
-    if "%COMMON_ARGS_KEY%"=="--var1" (set VARNUMBER1=%COMMON_ARGS_VALUE%)
+    if "%COMMON_ARGS_KEY%"=="--ent" (set GF_VERSION=ent)
     goto end
 
 :cli-up-help
@@ -178,6 +173,33 @@ goto end
     echo.
     echo Command:
     echo      demo              Show demo info.
+    echo Options:
+    echo      --help, -h        Show more information with UP Command.
+    echo      --ent             Startup grafana enterprise version. Default use grafana OSS.
+    goto end
+
+@rem ------------------- Command "down" method -------------------
+
+:cli-down
+    echo ^> Close Down Grafana
+    IF EXIST %CONF_FILE_PATH% (
+        for /f "tokens=1,2 delims==" %%a in ( %CONF_FILE_PATH% ) do (
+            if "%%a" == "GF_VERSION" (
+                set GF_VERSION=%%b
+                docker-compose -f .\conf\docker\docker-compose-%GF_VERSION%.yml --env-file %CONF_FILE_PATH% down
+                del %CONF_FILE_PATH%
+            )
+        )
+    )
+    goto end
+
+:cli-down-args
+    goto end
+
+:cli-down-help
+    echo This is a Command Line Interface with project %PROJECT_NAME%
+    echo Close down Server
+    echo.
     echo Options:
     echo      --help, -h        Show more information with UP Command.
     goto end
@@ -202,23 +224,6 @@ goto end
     echo      --help, -h        Show more information with UP Command.
     goto end
 
-@rem ------------------- Command "down" method -------------------
-
-:cli-down
-    echo ^> Close Down Grafana
-    docker-compose -f ./conf/docker/docker-compose.yml --env-file ./conf/docker/.env down
-    goto end
-
-:cli-down-args
-    goto end
-
-:cli-down-help
-    echo This is a Command Line Interface with project %PROJECT_NAME%
-    echo Close down Server
-    echo.
-    echo Options:
-    echo      --help, -h        Show more information with UP Command.
-    goto end
 
 @rem ------------------- End method-------------------
 
