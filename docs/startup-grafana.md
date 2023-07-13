@@ -37,6 +37,15 @@ GF_<SectionName>_<KeyName>_<SubKeyName>_<ExtKeyName>=<Value>
 
 設定檔可藉由環境變數動態補充，也可以自環境變數 ( ```$__env{VARIABLE_NAME}``` ) 或檔案 ( ```$__file{FILE_PATH}``` )，在企業版 7.1 後可以使用 [Hashicorp Vault](https://www.hashicorp.com/products/vault) 為來源。
 
+### 管理者 ( Administrator )
+
+依據官方文件說明，預設的管理者帳號與密碼皆為 admin，並第一次登入系統時要求重新設定密碼；倘若要修改預設帳號與密碼，則使用以下環境參數來改變：
+
++ GF_SECURITY_ADMIN_USER
++ GF_SECURITY_ADMIN_PASSWORD
+
+使用上述環境參數修改密碼後，會視同已經重設密碼後的狀態。
+
 ## Plugins
 
 Grafana 插件可以利用設定檔 ( Configuration ) 或[命令介面 ( Command line interface )](https://grafana.com/docs/grafana/latest/cli/)

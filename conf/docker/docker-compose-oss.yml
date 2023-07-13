@@ -12,7 +12,8 @@ services:
     networks:
       - bisa
     environment:
-      - discovery.type=single-node
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=adminpsw
     volumes:
       - ${GF_DATA_VOLUME}:/var/lib/grafana
 
