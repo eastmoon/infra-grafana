@@ -39,6 +39,7 @@ Offered as a fully managed service, Grafana Cloud is the fastest way to adopt Gr
 ```
 grafana up
 ```
+> 預設啟用 OSS 版本，若要使用企業版則添加參數 ```--ent```
 
 + 關閉
 
