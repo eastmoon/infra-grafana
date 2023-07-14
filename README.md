@@ -57,7 +57,9 @@ grafana down
 grafana into
 ```
 
-+ 設定管理資訊?
+### User managemeent
+
+詳細文獻整理參閱 [Server user management](./docs/server-user-management.md)
 
 ### [Dashboards](https://grafana.com/docs/grafana/latest/dashboards/?pg=hp&plcmt=lt-box-dashboards)
 
