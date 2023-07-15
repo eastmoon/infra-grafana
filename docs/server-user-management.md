@@ -1,4 +1,4 @@
-# 啟用 Grafana
+# 用戶管理
 
 + [Server user management](https://grafana.com/docs/grafana/latest/administration/user-management/server-user-management/)
     - [Assign or remove Grafana server administrator privileges](https://grafana.com/docs/grafana/latest/administration/user-management/server-user-management/assign-remove-server-admin-privileges/)
