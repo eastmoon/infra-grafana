@@ -140,12 +140,15 @@ goto end
     echo PROJECT_NAME=%PROJECT_NAME% > %CONF_FILE_PATH%
     echo GF_VERSION=%GF_VERSION% >> %CONF_FILE_PATH%
 
-    echo ^> Build Docker images
+    @rem Setting cache directory
     set TARGET_DIR=%CLI_DIRECTORY%\cache\grafana-data-%GF_VERSION%
     IF NOT EXIST %TARGET_DIR% (
         mkdir %TARGET_DIR%
     )
     echo GF_DATA_VOLUME=%TARGET_DIR% >> %CONF_FILE_PATH%
+
+    @rem Setting shell directory
+    echo GF_SHELL_VOLUME=%CLI_DIRECTORY%\shell >> %CONF_FILE_PATH%
     goto end
 )
 
@@ -207,8 +210,15 @@ goto end
 @rem ------------------- Command "into" method -------------------
 
 :cli-into
-    echo ^> Into Grafana : docker-grafana_%PROJECT_NAME%
-    docker exec -ti docker-grafana_%PROJECT_NAME% bash
+    IF EXIST %CONF_FILE_PATH% (
+        for /f "tokens=1,2 delims==" %%a in ( %CONF_FILE_PATH% ) do (
+            if "%%a" == "GF_VERSION" (
+                set GF_VERSION=%%b
+                echo ^> Into Grafana : docker-grafana-%GF_VERSION%_%PROJECT_NAME%
+                docker exec -ti -w "/usr/share/grafana/shell" docker-grafana-%GF_VERSION%_%PROJECT_NAME% bash
+            )
+        )
+    )
     goto end
 
 :cli-into-args
