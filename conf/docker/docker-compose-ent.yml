@@ -16,6 +16,7 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=adminpsw
     volumes:
       - ${GF_DATA_VOLUME}:/var/lib/grafana
+      - ${GF_SHELL_VOLUME}:/usr/share/grafana/shell
 
 networks:
   bisa:
