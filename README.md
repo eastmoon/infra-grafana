@@ -57,6 +57,10 @@ grafana down
 grafana into
 ```
 
+### HTTP API
+
+詳細文獻整理參閱 [HTTP API](./docs/developer-http-api.md)
+
 ### User managemeent
 
 詳細文獻整理參閱 [Server user management](./docs/server-user-management.md)
