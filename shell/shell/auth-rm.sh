@@ -28,12 +28,12 @@ function args {
 }
 
 function short {
-    echo "Retrieve API tokens list"
+    echo "Remove API tokens list"
 }
 
 function help {
     echo "This is a Command Line Interface with project ${PROJECT_NAME}"
-    echo "Retrieve API tokens list."
+    echo "Remove API tokens list."
     echo "Only works with Basic Authentication (username and password)."
     echo ""
     echo "Options:"
