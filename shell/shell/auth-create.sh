@@ -8,13 +8,25 @@
 function action {
     if [[ -n ${AUTH_TOKEN_NAME} ]];
     then
+        # Generate request data
         data='{"name": "'${AUTH_TOKEN_NAME}'", "role": "'${AUTH_TOKEN_ROLE}'", "secondsToLive": '${AUTH_TOKEN_STL}'}'
+        # Send request
         curl --request POST \
             --header "Accept: application/json" \
             --header "Content-Type: application/json" \
             --header "X-Grafana-Org-Id: ${AUTH_TOKEN_ORG}" \
             --data "${data}" \
-            ${GF_SERVER_PROTOCOL}://${GF_SECURITY_ADMIN_USER}:${GF_SECURITY_ADMIN_PASSWORD}@${GF_SERVER_HTTP_ADDR}:${GF_SERVER_HTTP_PORT}/api/auth/keys
+            ${GF_SERVER_PROTOCOL}://${GF_SECURITY_ADMIN_USER}:${GF_SECURITY_ADMIN_PASSWORD}@${GF_SERVER_HTTP_ADDR}:${GF_SERVER_HTTP_PORT}/api/auth/keys | tee ~/.tokentmp
+        # Parser token information to /home directory
+        for str in $(cat ~/.tokentmp | sed 's/{//g' | sed 's/}//g' | sed 's/\"//g' | sed 's/,/ /g')
+        do
+            IFS=':' read -ra ADDR <<< "${str}"
+            key=${ADDR[0]}
+            value=${ADDR[1]}
+            export AUTH_TOKEN_TMP_${key^^}="${value}"
+        done
+        echo ${AUTH_TOKEN_TMP_KEY} > ~/.${AUTH_TOKEN_TMP_ID}_${AUTH_TOKEN_TMP_NAME}.token
+        rm ~/.tokentmp
         echo ""
     else
         echo "Must given --name."
