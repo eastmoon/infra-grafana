@@ -35,7 +35,7 @@ function help {
     echo ""
     echo "Options:"
     echo "    --help, -h        Show more information with Command."
-    echo "    --id              Restrieve user with ID."
+    echo "    --id              Retrieve user with ID."
     command-description ${BASH_SOURCE##*/}
 }
 
