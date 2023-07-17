@@ -8,12 +8,12 @@ function args {
 }
 
 function short {
-    echo "User API"
+    echo "Organization API"
 }
 
 function help {
     echo "This is a Command Line Interface with project ${PROJECT_NAME}"
-    echo "Execute User API"
+    echo "Execute Organization API"
     echo "Ref : https://grafana.com/docs/grafana/latest/developers/http_api/user"
     echo ""
     echo "Options:"
