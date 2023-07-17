@@ -8,11 +8,11 @@ function action {
         ORGS_API_URL=${ORGS_API_URL}/name/${ORGS_NAME}
     fi
 
-    curl --request GET \
+    curl --silent --request GET \
         --header "Accept: application/json" \
         --header "Content-Type: application/json" \
         --user ${GF_SECURITY_ADMIN_USER}:${GF_SECURITY_ADMIN_PASSWORD} \
-        ${GF_SERVER_PROTOCOL}://${GF_SERVER_HTTP_ADDR}:${GF_SERVER_HTTP_PORT}${ORGS_API_URL}
+        ${GF_SERVER_PROTOCOL}://${GF_SERVER_HTTP_ADDR}:${GF_SERVER_HTTP_PORT}${ORGS_API_URL} | sed "s/\[{/\[\n{/" | sed "s/}\]/}\n\]/" | sed "s/},/},\n/g"
     echo ""
 }
 

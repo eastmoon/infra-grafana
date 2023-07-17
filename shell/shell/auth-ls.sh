@@ -1,11 +1,11 @@
 # Declare function
 function action {
-    curl --request GET \
+    curl --silent --request GET \
         --header "Accept: application/json" \
         --header "Content-Type: application/json" \
         --user ${GF_SECURITY_ADMIN_USER}:${GF_SECURITY_ADMIN_PASSWORD} \
         --header "X-Grafana-Org-Id: ${AUTH_TOKEN_ORG}" \
-        ${GF_SERVER_PROTOCOL}://${GF_SERVER_HTTP_ADDR}:${GF_SERVER_HTTP_PORT}/api/auth/keys
+        ${GF_SERVER_PROTOCOL}://${GF_SERVER_HTTP_ADDR}:${GF_SERVER_HTTP_PORT}/api/auth/keys | sed "s/\[{/\[\n{/" | sed "s/}\]/}\n\]/" | sed "s/},/},\n/g"
     echo ""
 }
 

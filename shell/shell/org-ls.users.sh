@@ -2,11 +2,11 @@
 function action {
     if [[ -n ${ORGS_ID} ]];
     then
-        curl --request GET \
+        curl --silent --request GET \
             --header "Accept: application/json" \
             --header "Content-Type: application/json" \
             --user ${GF_SECURITY_ADMIN_USER}:${GF_SECURITY_ADMIN_PASSWORD} \
-            ${GF_SERVER_PROTOCOL}://${GF_SERVER_HTTP_ADDR}:${GF_SERVER_HTTP_PORT}/api/orgs/${ORGS_ID}/users
+            ${GF_SERVER_PROTOCOL}://${GF_SERVER_HTTP_ADDR}:${GF_SERVER_HTTP_PORT}/api/orgs/${ORGS_ID}/users | sed "s/\[{/\[\n{/" | sed "s/}\]/}\n\]/" | sed "s/},/},\n/g"
         echo ""
     else
         echo "Must given --id."

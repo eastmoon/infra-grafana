@@ -2,11 +2,11 @@
 
 # Declare function
 function action {
-    curl --request GET \
+    curl --silent --request GET \
         --header "Accept: application/json" \
         --header "Content-Type: application/json" \
         --header "Authorization: Bearer ${UTILS_AUTH_TOKENS}" \
-        ${GF_SERVER_PROTOCOL}://${GF_SERVER_HTTP_ADDR}:${GF_SERVER_HTTP_PORT}/api/org/users
+        ${GF_SERVER_PROTOCOL}://${GF_SERVER_HTTP_ADDR}:${GF_SERVER_HTTP_PORT}/api/org/users | sed "s/\[{/\[\n{/" | sed "s/}\]/}\n\]/" | sed "s/},/},\n/g"
     echo ""
 }
 
