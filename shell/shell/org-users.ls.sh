@@ -34,6 +34,7 @@ function short {
 function help {
     echo "This is a Command Line Interface with project ${PROJECT_NAME}"
     echo "Retrieve users in organization."
+    echo "Only works with Basic Authentication (username and password)."
     echo ""
     echo "Options:"
     echo "    --help, -h        Show more information with Command."
