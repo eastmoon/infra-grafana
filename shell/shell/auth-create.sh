@@ -11,7 +11,7 @@ function action {
         # Generate request data
         data='{"name": "'${AUTH_TOKEN_NAME}'", "role": "'${AUTH_TOKEN_ROLE}'", "secondsToLive": '${AUTH_TOKEN_STL}'}'
         # Send request
-        curl --request POST \
+        curl --silent --request POST \
             --header "Accept: application/json" \
             --header "Content-Type: application/json" \
             --user ${GF_SECURITY_ADMIN_USER}:${GF_SECURITY_ADMIN_PASSWORD} \
