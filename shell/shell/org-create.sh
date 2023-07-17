@@ -8,8 +8,9 @@ function action {
         curl --request POST \
             --header "Accept: application/json" \
             --header "Content-Type: application/json" \
+            --user ${GF_SECURITY_ADMIN_USER}:${GF_SECURITY_ADMIN_PASSWORD} \
             --data "${data}" \
-            ${GF_SERVER_PROTOCOL}://${GF_SECURITY_ADMIN_USER}:${GF_SECURITY_ADMIN_PASSWORD}@${GF_SERVER_HTTP_ADDR}:${GF_SERVER_HTTP_PORT}/api/orgs
+            ${GF_SERVER_PROTOCOL}://${GF_SERVER_HTTP_ADDR}:${GF_SERVER_HTTP_PORT}/api/orgs
         echo ""
     else
         echo "Must given --name."

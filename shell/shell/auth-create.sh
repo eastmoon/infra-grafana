@@ -14,9 +14,10 @@ function action {
         curl --request POST \
             --header "Accept: application/json" \
             --header "Content-Type: application/json" \
+            --user ${GF_SECURITY_ADMIN_USER}:${GF_SECURITY_ADMIN_PASSWORD} \
             --header "X-Grafana-Org-Id: ${AUTH_TOKEN_ORG}" \
             --data "${data}" \
-            ${GF_SERVER_PROTOCOL}://${GF_SECURITY_ADMIN_USER}:${GF_SECURITY_ADMIN_PASSWORD}@${GF_SERVER_HTTP_ADDR}:${GF_SERVER_HTTP_PORT}/api/auth/keys | tee ~/.tokentmp
+            ${GF_SERVER_PROTOCOL}://${GF_SERVER_HTTP_ADDR}:${GF_SERVER_HTTP_PORT}/api/auth/keys | tee ~/.tokentmp
         # Parser token information to /home directory
         for str in $(cat ~/.tokentmp | sed 's/{//g' | sed 's/}//g' | sed 's/\"//g' | sed 's/,/ /g')
         do
