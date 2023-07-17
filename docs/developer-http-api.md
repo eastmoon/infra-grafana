@@ -61,11 +61,25 @@ http://localhost:3000/api/org
     - 使用 ```/api/orgs/:id/users``` 的 GET 與組織編號來取得隸屬組的用戶
 + 組織管理應用程式介面，使用代碼驗證
     - 使用 ```/api/org``` 來取得現在組織的資訊
-    - 使用 ```/api/org/users``` 來取得隸屬此組織的用戶，其後配合用戶編號可以操作用戶在此組織的更新資訊、移除等動作
+    - 使用 ```/api/org/users``` 來取得隸屬此組織的用戶，其後配合用戶登入名、編號可以操作用戶在此組織的加入、更新、移除動作
 
 相關指令可在 ```grafana.bat into``` 後執行 ```bash api.sh org <command>``` 來測試；範例僅針對主要介面操作提供範本，其他文獻內容則依此設計延伸與修改。
 
-## 用戶系統
+## 用戶
 
 + [User API](https://grafana.com/docs/grafana/latest/developers/http_api/user/)
+
+用戶的建立是管理者介面設計，然而建立的用戶清單、操作則要使用用戶應用程式介面，而其介面可區分為兩類：
+
++ 從用戶清單操作，使用管理者帳密的基礎驗證
+    - 使用 ```api/users``` 的 GET 方式列出用戶清單
+    - 基於 ```api/users``` 與用戶編號，列出用戶所在的組織、團隊
++ 從實際用戶操作，使用用戶帳密的基礎驗證
+    - 使用 ```api/user``` 的 GET 方式取得驗證用戶的資訊
+    - 使用 ```api/user``` 的 PUT 方式更新驗證用戶的密碼
+    - 使用 ```api/user``` 與組織編號，切換驗證用戶對應組織的內容
+    - 使用 ```api/user``` 與團隊編號，切換驗證用戶對應團隊的內容
+
+## 團隊
+
 + [Team API](https://grafana.com/docs/grafana/latest/developers/http_api/team/)
