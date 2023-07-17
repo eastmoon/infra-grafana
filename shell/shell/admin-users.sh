@@ -46,7 +46,7 @@ function help {
     echo "But all users list, it need call User API."
     echo ""
     echo "Options:"
-    echo "    --help, -h        Show more information with UP Command."
+    echo "    --help, -h        Show more information with Command."
     echo "    --username        New username for user."
     echo "    --password        The password for user."
     command-description ${BASH_SOURCE##*/}

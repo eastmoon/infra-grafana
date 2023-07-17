@@ -26,7 +26,7 @@ function help {
     echo "Delete user in users list, DELETE /api/org/users/:userId"
     echo ""
     echo "Options:"
-    echo "    --help, -h        Show more information with UP Command."
+    echo "    --help, -h        Show more information with Command."
     command-description ${BASH_SOURCE##*/}
 }
 

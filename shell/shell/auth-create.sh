@@ -71,7 +71,7 @@ function help {
     echo "But all users list, it need call User API."
     echo ""
     echo "Options:"
-    echo "    --help, -h        Show more information with UP Command."
+    echo "    --help, -h        Show more information with Command."
     echo "    --name            The key name."
     echo "    --role            Sets the access level/Grafana Role for the key. Default use 'Viewer', could change 'Editor', 'Admin'"
     echo "    --stl             Sets the key expiration in seconds. Default use 86400, or set 0 for use 'api_key_max_seconds_to_live' value."

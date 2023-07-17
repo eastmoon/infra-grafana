@@ -22,7 +22,7 @@ function help {
     echo "Only works with Basic Authentication (username and password)."
     echo ""
     echo "Options:"
-    echo "    --help, -h        Show more information with UP Command."
+    echo "    --help, -h        Show more information with Command."
     command-description ${BASH_SOURCE##*/}
 }
 # Execute script

@@ -23,7 +23,7 @@ function help {
     echo "Updates / removes and reloads database settings then use PUT request."
     echo ""
     echo "Options:"
-    echo "    --help, -h        Show more information with UP Command."
+    echo "    --help, -h        Show more information with Command."
     command-description ${BASH_SOURCE##*/}
 }
 

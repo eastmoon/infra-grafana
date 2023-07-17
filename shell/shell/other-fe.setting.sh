@@ -21,7 +21,7 @@ function help {
     echo "Returns Frontend Settings"
     echo ""
     echo "Options:"
-    echo "    --help, -h        Show more information with UP Command."
+    echo "    --help, -h        Show more information with Command."
     command-description ${BASH_SOURCE##*/}
 }
 

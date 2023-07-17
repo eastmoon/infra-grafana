@@ -17,7 +17,7 @@ function help {
     echo "Ref : https://grafana.com/docs/grafana/latest/developers/http_api/auth"
     echo ""
     echo "Options:"
-    echo "    --help, -h        Show more information with UP Command."
+    echo "    --help, -h        Show more information with Command."
     command-description ${BASH_SOURCE##*/}
 }
 
