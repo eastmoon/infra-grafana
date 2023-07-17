@@ -80,6 +80,8 @@ http://localhost:3000/api/org
     - 使用 ```api/user``` 與組織編號，切換驗證用戶對應組織的內容
     - 使用 ```api/user``` 與團隊編號，切換驗證用戶對應團隊的內容
 
+相關指令可在 ```grafana.bat into``` 後執行 ```bash api.sh user <command>``` 來測試；範例僅針對主要介面操作提供範本，其他文獻內容則依此設計延伸與修改。
+
 ## 團隊
 
 + [Team API](https://grafana.com/docs/grafana/latest/developers/http_api/team/)
