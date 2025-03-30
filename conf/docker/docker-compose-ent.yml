@@ -1,7 +1,6 @@
 # Docker-Compose document
 # Ref : https://docs.docker.com/compose/compose-file/
 
-version: "3.8"
 services:
   grafana:
     image: grafana/grafana-enterprise
