@@ -1,0 +1,1 @@
+cd /usr/share/grafana/shell/cli && bash api.sh ${@}
