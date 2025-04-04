@@ -24,7 +24,7 @@
 + 操作用戶資訊，```api/admin/users```
     - 用戶清單、資訊需使用 User API 來執行
 
-相關指令可在 ```grafana.bat into``` 後執行 ```bash api.sh admin <command>``` 來測試。
+相關指令可在 ```grafana.bat into``` 後執行 ```bash api admin <command>``` 來測試，或執行 ```bash test-admin.sh``` 範本。
 
 ## 代碼驗證
 
@@ -45,7 +45,7 @@ http://localhost:3000/api/org
 + 使用 ```/api/auth/keys``` 的 GET 方式取得註冊代碼清單
 + 使用 ```/api/auth/keys``` 的 DELETE 方式來移除代碼
 
-相關指令可在 ```grafana.bat into``` 後執行 ```bash api.sh auth <command>``` 來測試；範例僅針對主要介面操作提供範本，其他文獻內容則依此設計延伸與修改。
+相關指令可在 ```grafana.bat into``` 後執行 ```bash api.sh auth <command>``` 來測試，或執行 ```bash test-auth.sh``` 範本；範例僅針對主要介面操作提供範本，其他文獻內容則依此設計延伸與修改。
 
 ## 組織
 
@@ -63,7 +63,7 @@ http://localhost:3000/api/org
     - 使用 ```/api/org``` 來取得現在組織的資訊
     - 使用 ```/api/org/users``` 來取得隸屬此組織的用戶，其後配合用戶登入名、編號可以操作用戶在此組織的加入、更新、移除動作
 
-相關指令可在 ```grafana.bat into``` 後執行 ```bash api.sh org <command>``` 來測試；範例僅針對主要介面操作提供範本，其他文獻內容則依此設計延伸與修改。
+相關指令可在 ```grafana.bat into``` 後執行 ```bash api org <command>``` 來測試，或執行 ```bash test-org.sh``` 範本；範例僅針對主要介面操作提供範本，其他文獻內容則依此設計延伸與修改。
 
 ## 用戶
 
@@ -80,7 +80,7 @@ http://localhost:3000/api/org
     - 使用 ```api/user``` 與組織編號，切換驗證用戶對應組織的內容
     - 使用 ```api/user``` 與團隊編號，切換驗證用戶對應團隊的內容
 
-相關指令可在 ```grafana.bat into``` 後執行 ```bash api.sh user <command>``` 來測試；範例僅針對主要介面操作提供範本，其他文獻內容則依此設計延伸與修改。
+相關指令可在 ```grafana.bat into``` 後執行 ```bash api user <command>``` 來測試，或執行 ```bash test-user.sh``` 範本；；範例僅針對主要介面操作提供範本，其他文獻內容則依此設計延伸與修改。
 
 ## 團隊
 
@@ -92,3 +92,5 @@ http://localhost:3000/api/org
 + 成員管理，基於 ```api/team/:teamId/members``` 與用戶編號進行成員管理
 
 目前並無法透過 API 更新成員為管理者。
+
+相關指令可在 ```grafana.bat into``` 後執行 ```bash api team <command>``` 來測試，或執行 ```bash test-team.sh``` 範本；；範例僅針對主要介面操作提供範本，其他文獻內容則依此設計延伸與修改。
