@@ -2,7 +2,7 @@
 
 # Declare function
 function current-token {
-    for token_file in $(find ~/ -type f -iname .*.token | sort -r | head -n 1)
+    for token_file in $(find ~/ -type f -iname .[0-9]*_*.token | sort -r | head -n 1)
     do
         export UTILS_AUTH_TOKENS_FILE=${token_file}
         export UTILS_AUTH_TOKENS=$(cat ${token_file})
