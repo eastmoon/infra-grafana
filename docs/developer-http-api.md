@@ -85,3 +85,10 @@ http://localhost:3000/api/org
 ## 團隊
 
 + [Team API](https://grafana.com/docs/grafana/latest/developers/http_api/team/)
+
+團隊是用戶的群組，可利用代碼驗證完成所有介面設計，但其操作都是對當前代碼所屬的組織進行，其主要可包括兩部分：
+
++ 團隊列表，基於 ```api/team``` 進行相關讀取、新增、更新、刪除
++ 成員管理，基於 ```api/team/:teamId/members``` 與用戶編號進行成員管理
+
+目前並無法透過 API 更新成員為管理者。
