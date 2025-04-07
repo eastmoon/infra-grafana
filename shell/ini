@@ -1,0 +1,24 @@
+r() {
+    if [  -e ${1} ]; then
+        t=$(cat ${1} | wc -l)
+        s=$(cat ${1} | grep "^\[${2}\]" -n | head -n 1 | awk '{split($0,a, ":"); print a[1]}')
+        e=$(tail -n `expr ${t} - ${s}` ${1} | grep "^\[" -n | head -n 1 | awk '{split($0,a, ":"); print a[1]}')
+        tail -n `expr ${t} - ${s} + 1` ${1} | head -n `expr ${e}`
+    fi
+}
+
+w() {
+    if [  -e ${1} ] && [ -e ./ini.d/${2}.ini ]; then
+        t=$(cat ${1} | wc -l)
+        s=$(cat ${1} | grep "^\[${2}\]" -n | head -n 1 | awk '{split($0,a, ":"); print a[1]}')
+        e=$(tail -n `expr ${t} - ${s}` ${1} | grep "^\[" -n | head -n 1 | awk '{split($0,a, ":"); print a[1]}')
+        head -n `expr ${s} - 1` ${1} > /tmp/${filenam}.head.tmp
+        tail -n `expr ${t} - ${s} - ${e} + 1` ${1} > /tmp/${filenam}.tail.tmp
+        cat /tmp/${filenam}.head.tmp > ${1}
+        cat ./ini.d/${2}.ini >> ${1}
+        cat /tmp/${filenam}.tail.tmp >> ${1}
+    fi
+}
+
+# Execute script
+"${@}"
