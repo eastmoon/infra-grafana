@@ -149,6 +149,9 @@ goto end
 
     @rem Setting shell directory
     echo GF_SHELL_VOLUME=%CLI_DIRECTORY%\shell >> %CONF_FILE_PATH%
+
+    @rem Setting configuration file
+    echo GF_CONFIG_DIR=%CLI_DIRECTORY%\conf\grafana >> %CONF_FILE_PATH%
     goto end
 )
 

@@ -16,6 +16,7 @@ services:
     volumes:
       - ${GF_DATA_VOLUME}:/var/lib/grafana
       - ${GF_SHELL_VOLUME}:/usr/share/grafana/shell
+      - ${GF_CONFIG_DIR}/grafana.ini:/etc/grafana/grafana.ini:ro
 
 networks:
   bisa:
