@@ -29,6 +29,10 @@
 ## 代碼驗證
 
 + [Authentication API](https://grafana.com/docs/grafana/latest/developers/http_api/auth/)
+    - Grafana 在 11.3.0 版本後將移除 API Keys 的設定，改用 [Service accounts](https://grafana.com/docs/grafana/latest/administration/service-accounts/) 替代
+    - [Configure JWT authentication](https://grafana.com/docs/grafana/latest/setup-grafana/configure-security/configure-authentication/jwt/)，詳細參考[開發 JWT 認證](./developer-jwt-authorization.md)範本說明。
+
+#### API Keys
 
 運用 HTTP API 時，若不是使用基礎驗證就需取得應用應用程式介面代碼 ( API Tokens ) 做為應用程式介面的代碼驗證，使 API 呼叫時可以提供如下資訊：
 
@@ -46,6 +50,24 @@ http://localhost:3000/api/org
 + 使用 ```/api/auth/keys``` 的 DELETE 方式來移除代碼
 
 相關指令可在 ```grafana.bat into``` 後執行 ```bash api.sh auth <command>``` 來測試，或執行 ```bash test-auth.sh``` 範本；範例僅針對主要介面操作提供範本，其他文獻內容則依此設計延伸與修改。
+
+#### Service Accounts
+
+依據官方文獻所述，在 Grafana v11 版本後會逐步將 API Key 改用 Service Account，這個服務設計本質上是 API Keys 的進階，先建立服務帳戶，在建立帳戶下保有的複數 API Keys。
+
+Grafana 的設計中，用戶 ( User ) 與服務帳戶 ( Service Account ) 是不同的用途，其差異如下所述：
+
++ 用戶是經由供介面登入後，依據權限操作與閱覽相應的內容
++ 服務帳戶是提供 API 的操作權限
+
+若用戶是規劃誰可以經由介面閱覽數據，服務帳戶則是規劃誰可以管理系統 API，其主要 API 包括兩部分：
+
++ 使用 ```/api/serviceaccounts/search``` 來搜尋並取回所有的服務帳戶
++ 使用 ```/api/serviceaccounts/:id``` 的 GET、POST、PATCH、DELETE 方式對指定服務帳號進行管理
++ 使用 ```/api/serviceaccounts/migrate``` 的方式將舊 API Keys 內容合併，本範本為實驗此功能
++ 使用 ```/api/serviceaccounts/:id/tokens``` 的 GET、POST、DELETE 方式來管理指定服務帳號的 API 代碼 ( Token )
+
+相關指令可在 ```grafana.bat into``` 後執行 ```bash api.sh sa <command>``` 來測試，或執行 ```bash test-service-accounts.sh``` 範本，此外部分範本會使用此功能建立相關範本需要的 API 代碼；範例僅針對主要介面操作提供範本，其他文獻內容則依此設計延伸與修改。
 
 ## 組織
 
@@ -80,7 +102,7 @@ http://localhost:3000/api/org
     - 使用 ```api/user``` 與組織編號，切換驗證用戶對應組織的內容
     - 使用 ```api/user``` 與團隊編號，切換驗證用戶對應團隊的內容
 
-相關指令可在 ```grafana.bat into``` 後執行 ```bash api user <command>``` 來測試，或執行 ```bash test-user.sh``` 範本；；範例僅針對主要介面操作提供範本，其他文獻內容則依此設計延伸與修改。
+相關指令可在 ```grafana.bat into``` 後執行 ```bash api user <command>``` 來測試，或執行 ```bash test-user.sh``` 範本；範例僅針對主要介面操作提供範本，其他文獻內容則依此設計延伸與修改。
 
 ## 團隊
 
@@ -93,4 +115,4 @@ http://localhost:3000/api/org
 
 目前並無法透過 API 更新成員為管理者。
 
-相關指令可在 ```grafana.bat into``` 後執行 ```bash api team <command>``` 來測試，或執行 ```bash test-team.sh``` 範本；；範例僅針對主要介面操作提供範本，其他文獻內容則依此設計延伸與修改。
+相關指令可在 ```grafana.bat into``` 後執行 ```bash api team <command>``` 來測試，或執行 ```bash test-team.sh``` 範本；範例僅針對主要介面操作提供範本，其他文獻內容則依此設計延伸與修改。
