@@ -10,12 +10,12 @@ api sa ls
 name=DemoSA
 role=Admin
 api sa create --name=${name} --role=${role}
-id=$(api sa ls | grep ${name} | awk '{split($0,a, ","); split(a[1], b, ":"); print b[2]}')
+id=$(api sa ls | grep ${name} | tr ',' '\n' | awk '$0 ~ /"id"/ { split( $0, a, ":" ); print(a[2]) }')
 echo ${name} : ${id}
 ### Create token and remove it
 tname=DemoTokenA
 api sa token.create --id=${id} --name=${tname}
-tid=$(api sa token.ls --id=${id} | grep ${tname} | awk '{split($0,a, ","); split(a[1], b, ":"); print b[2]}')
+tid=$(api sa token.ls --id=${id} | grep ${tname} | tr ',' '\n' | awk '$0 ~ /"id"/ { split( $0, a, ":" ); print(a[2]) }')
 echo ${tname} : ${tid}
 api sa token.rm --id=${id} --tid=${tid}
 [ $(api sa token.ls --id=${id} | grep ${tname} | wc -l) -eq 0 ] && echo ${tname} not exists || echo $(api sa token.ls --id=${id} | grep ${tname})

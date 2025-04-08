@@ -12,9 +12,9 @@ satmpfile=/tmp/satoken
 if [ -z $(api sys auth.token) ]; then
     echo "----- Auth create -----"
     [ $(api sa ls | grep ${saname} | wc -l) -eq 0 ] && api sa create --name=${saname} --role=${sarole} || true
-    said=$(api sa ls | grep ${saname} | awk '{split($0,a, ","); split(a[1], b, ":"); print b[2]}')
+    said=$(api sa ls | grep ${saname} | tr ',' '\n' | awk '$0 ~ /"id"/ { split( $0, a, ":" ); print(a[2]) }')
     if [ $(api sa token.ls --id=${said} | grep ${satoken} | wc -l) -gt 0 ]; then
-        satid=$(api sa token.ls --id=${said} | grep ${satoken} | awk '{split($0,a, ","); split(a[1], b, ":"); print b[2]}')
+        satid=$(api sa token.ls --id=${said} | grep ${satoken} | tr ',' '\n' | awk '$0 ~ /"id"/ { split( $0, a, ":" ); print(a[2]) }')
         api sa token.rm --id=${said} --tid=${satid}
     fi
     api sa token.create --id=${said} --name=${satoken} | tee ${satmpfile}
@@ -27,7 +27,7 @@ api team ls
 name=demo
 email=demo@demo.org
 api team create --name=${name} --email=${email}
-id=$(api team ls | grep ${name} | awk '{split($0,a, ","); split(a[1], b, ":"); print b[2]}')
+id=$(api team ls | grep ${name} | tr ',' '\n' | awk '$0 ~ /"id"/ { split( $0, a, ":" ); print(a[2]) }')
 echo ${name} : ${id}
 api team rm --id=${id}
 [ $(api team ls | grep ${name} | wc -l) -eq 0 ] && echo ${name} not exists || echo $(api team ls | grep ${name})
