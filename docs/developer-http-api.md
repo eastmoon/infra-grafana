@@ -116,3 +116,31 @@ Grafana 的設計中，用戶 ( User ) 與服務帳戶 ( Service Account ) 是�
 目前並無法透過 API 更新成員為管理者。
 
 相關指令可在 ```grafana.bat into``` 後執行 ```bash api team <command>``` 來測試，或執行 ```bash test-team.sh``` 範本；範例僅針對主要介面操作提供範本，其他文獻內容則依此設計延伸與修改。
+
+## 儀表板
+
++ [Dashboard API](https://grafana.com/docs/grafana/latest/developers/http_api/dashboard/)
+    - [Permissions](https://grafana.com/docs/grafana/latest/developers/http_api/dashboard_permissions/)
+    - [Version](https://grafana.com/docs/grafana/latest/developers/http_api/dashboard_versions/)
+    - [Shared](https://grafana.com/docs/grafana/latest/developers/http_api/dashboard_public/)、[Short URL](https://grafana.com/docs/grafana/latest/developers/http_api/short_url/)
++ [Folder API](https://grafana.com/docs/grafana/latest/developers/http_api/folder/)
+    - [Permissions](https://grafana.com/docs/grafana/latest/developers/http_api/folder_permissions/)
++ [Folder/Dashboard Search API](https://grafana.com/docs/grafana/latest/developers/http_api/folder_dashboard_search/)
+
+儀表板是 Grafana 主要的呈現介面，其運用可以參考整理文獻[儀表板 ( Dashboard ) 與面板 ( Panel )](./dashboards-and-panels.md)，對其操作可參閱上述 API 文獻，其主要可包括兩部分：
+
++ 目錄管理，用於整理儀表板的樹狀結構
+    - 使用 ```api/folders``` 的 GET、POST、DELETE 方式管理目錄
+    - 使用 ```api/folders/:id/permissions``` 來管理目錄的權限
++ 儀表板管理
+    - 使用 ```api/dashboards/db``` 的 POST 方式新增與更新儀表板
+        + 屬性 ```id``` 為 null 則表示為新增
+        + 屬性 ```title``` 在新增時此數值不可有重複
+        + 屬性 ```dashboard``` 的內容即為最終儀表板、面板的實際設定
+    - 使用 ```api/dashboards/uid``` 的 GET、DELETE 方式管理儀表板
+    - 使用 ```api/dashboards/uid/:id/permissions``` 來管理儀表板的權限
++ 全域功能
+    - 使用 ```api/search``` 來搜尋目錄與儀表板的資訊
+    - 使用 ```api/short-urls``` 將儀表板的 url 內容轉為短 URL
+
+相關指令可在 ```grafana.bat into``` 後執行 ```bash api dashboard <command>``` 來測試，或執行 ```bash test-dashboard-*.sh``` 等諸多範本；範例僅針對主要介面操作提供範本，其他文獻內容則依此設計延伸與修改。
