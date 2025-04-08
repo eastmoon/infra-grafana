@@ -63,13 +63,11 @@ grafana into
 
 ### User managemeent
 
-詳細文獻整理參閱 [Server user management](./docs/server-user-management.md)
+詳細文獻整理參閱 [Server user management](./docs/server-user-management.md)，範本操作參考 HTTP API 文獻的代碼驗證、組織、用戶、團隊。
 
 ### [Dashboards](https://grafana.com/docs/grafana/latest/dashboards/?pg=hp&plcmt=lt-box-dashboards)
 
-+ 啟用、刪除、匯出、匯入?
-+ 編輯模式 ( Edit )?
-+ 觀賞模式 ( View )?
+詳細文獻整理參閱 [Dashboards and Panels](./docs/dashboards-and-panels.md)，範本操作參考 HTTP API 文獻的儀表板。
 
 ### [Plugins](https://grafana.com/docs/grafana/latest/administration/plugin-management/?pg=hp&plcmt=lt-box-plugins)
 
@@ -77,6 +75,8 @@ grafana into
 
 + 匯入方式?
 + Plugin 專案? 設計? 編譯?
+
++ [Grafana Plugin Tools](https://grafana.com/developers/plugin-tools/)
 
 ### [Alerts](https://grafana.com/docs/grafana/latest/alerting/?pg=hp&plcmt=lt-box-alerts)
 
