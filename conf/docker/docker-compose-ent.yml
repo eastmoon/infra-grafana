@@ -13,10 +13,12 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=adminpsw
+      - GF_PATHS_CONFIG=/usr/share/grafana/host/grafana.ini
     volumes:
       - ${GF_DATA_VOLUME}:/var/lib/grafana
       - ${GF_SHELL_VOLUME}:/usr/share/grafana/shell
-      - ${GF_CONFIG_DIR}/grafana.ini:/etc/grafana/grafana.ini:ro
+      - ${GF_CONFIG_DIR}/grafana.ini:/usr/share/grafana/host/grafana.ini:ro
+      - ${GF_CERTS_DIR}:/usr/share/grafana/host/certs:ro
 
 networks:
   bisa:

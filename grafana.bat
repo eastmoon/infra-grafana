@@ -128,6 +128,7 @@ goto end
     echo      up                Startup Server.
     echo      down              Close down Server.
     echo      into              Into Server.
+    echo      cert              Certs management ools.
     echo.
     echo Run 'cli [COMMAND] --help' for more information on a command.
     goto end
@@ -150,8 +151,15 @@ goto end
     @rem Setting shell directory
     echo GF_SHELL_VOLUME=%CLI_DIRECTORY%\shell >> %CONF_FILE_PATH%
 
-    @rem Setting configuration file
+    @rem Setting configuration directory
     echo GF_CONFIG_DIR=%CLI_DIRECTORY%\conf\grafana >> %CONF_FILE_PATH%
+
+    @rem Setting certs directory
+    set TARGET_DIR=%CLI_DIRECTORY%\cache\certs
+    IF NOT EXIST %TARGET_DIR% (
+        mkdir %TARGET_DIR%
+    )
+    echo GF_CERTS_DIR=%TARGET_DIR% >> %CONF_FILE_PATH%
     goto end
 )
 
@@ -233,6 +241,29 @@ goto end
     echo.
     echo Command:
     echo      demo              Show demo info.
+    echo Options:
+    echo      --help, -h        Show more information with UP Command.
+    goto end
+
+@rem ------------------- Command "cert" method -------------------
+
+:cli-cert
+    docker build -t grafana-certs:%PROJECT_NAME% %CLI_DIRECTORY%\conf\docker\certs
+    docker run -ti --rm ^
+        -v %CLI_DIRECTORY%\cache\certs:/work/certs ^
+        -v %CLI_DIRECTORY%\shell:/work/shell ^
+        -w /work/shell ^
+        grafana-certs:%PROJECT_NAME% bash tool-genkey.sh /work/certs
+    echo Certs generated at %CLI_DIRECTORY%\cache\certs
+    goto end
+
+:cli-cert-args
+    goto end
+
+:cli-cert-help
+    echo This is a Command Line Interface with project %PROJECT_NAME%
+    echo Certs management ools.
+    echo.
     echo Options:
     echo      --help, -h        Show more information with UP Command.
     goto end
