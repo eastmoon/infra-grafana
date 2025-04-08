@@ -2,23 +2,26 @@
 api() {
   bash api ${@}
 }
-## Execute initial grafana server admin account
-echo "----- User operation -----"
-### Show all user
+## Execute script
+echo "----- Service Account operation -----"
+echo "==== list all ===="
 api sa ls
-### Create new service account
+echo "==== create Service Account ===="
 name=DemoSA
 role=Admin
 api sa create --name=${name} --role=${role}
 id=$(api sa ls | grep ${name} | tr ',' '\n' | awk '$0 ~ /"id"/ { split( $0, a, ":" ); print(a[2]) }')
+echo "==== Service Account information ===="
 echo ${name} : ${id}
-### Create token and remove it
+echo "==== create API Keys ===="
 tname=DemoTokenA
 api sa token.create --id=${id} --name=${tname}
 tid=$(api sa token.ls --id=${id} | grep ${tname} | tr ',' '\n' | awk '$0 ~ /"id"/ { split( $0, a, ":" ); print(a[2]) }')
+echo "==== API Keys information ===="
 echo ${tname} : ${tid}
+echo "==== remove API keys ===="
 api sa token.rm --id=${id} --tid=${tid}
 [ $(api sa token.ls --id=${id} | grep ${tname} | wc -l) -eq 0 ] && echo ${tname} not exists || echo $(api sa token.ls --id=${id} | grep ${tname})
-### Remove service account
+echo "==== remove Service Account ===="
 api sa rm --id=${id}
 [ $(api sa ls | grep ${name} | wc -l) -eq 0 ] && echo ${name} not exists || echo $(api sa ls | grep ${name})
