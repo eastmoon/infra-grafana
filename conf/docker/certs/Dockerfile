@@ -1,10 +1,13 @@
-FROM bash
+FROM python:slim-bullseye
 
-# Install libaray
-RUN \
-    apk update
-RUN \
-    apk add \
-        openssl
+# Install tools
+RUN apt update
+RUN apt install -y \
+  openssh-client \
+  openssl \
+  curl
+
+# Install libraries
+RUN pip install pyjwt pyjwt[crypto]
 
 # Setting Container

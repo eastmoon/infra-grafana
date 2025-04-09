@@ -4,8 +4,7 @@
 ## Execute Script
 if [ -d ${1} ]; then
     #### 1. Create a private key
-    openssl genpkey -algorithm EC -pkeyopt ec_paramgen_curve:P-256 > ${1}/private_key.pem
-
+    ssh-keygen -t rsa -b 4096 -m PEM -f ${1}/private_key.pem -N ""
     #### 2. Extract the public key from the private key
-    openssl pkey -pubout -in ${1}/private_key.pem > ${1}/public_key.pem
+    openssl rsa -in ${1}/private_key.pem -pubout -outform PEM -out ${1}/public_key.pem
 fi

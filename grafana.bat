@@ -172,7 +172,7 @@ goto end
     call :cli-up-docker-prepare
 
     @rem Run next deveopment with stdout
-    docker-compose -f .\conf\docker\docker-compose-%GF_VERSION%.yml --env-file %CONF_FILE_PATH% up -d
+    docker-compose -f .\conf\docker\docker-compose-%GF_VERSION%.yml --env-file %CONF_FILE_PATH% up -d --build
     goto end
 
 :cli-up-args
@@ -245,6 +245,33 @@ goto end
     echo      --help, -h        Show more information with UP Command.
     goto end
 
+@rem ------------------- Command "into-jwt" method -------------------
+
+:cli-into-jwt
+    IF EXIST %CONF_FILE_PATH% (
+        for /f "tokens=1,2 delims==" %%a in ( %CONF_FILE_PATH% ) do (
+            if "%%a" == "GF_VERSION" (
+                set GF_VERSION=%%b
+                echo ^> Into Grafana : docker-jwt-server-%GF_VERSION%_%PROJECT_NAME%
+                docker exec -ti -w "/usr/share/grafana/shell" docker-jwt-server-%GF_VERSION%_%PROJECT_NAME% bash
+            )
+        )
+    )
+    goto end
+
+:cli-into-jwt-args
+    goto end
+
+:cli-into-jwt-help
+    echo This is a Command Line Interface with project %PROJECT_NAME%
+    echo Into JWT Server
+    echo.
+    echo Command:
+    echo      demo              Show demo info.
+    echo Options:
+    echo      --help, -h        Show more information with UP Command.
+    goto end
+
 @rem ------------------- Command "cert" method -------------------
 
 :cli-cert
@@ -262,7 +289,7 @@ goto end
 
 :cli-cert-help
     echo This is a Command Line Interface with project %PROJECT_NAME%
-    echo Certs management ools.
+    echo Generate certs keys.
     echo.
     echo Options:
     echo      --help, -h        Show more information with UP Command.
