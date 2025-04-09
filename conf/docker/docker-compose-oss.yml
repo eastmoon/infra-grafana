@@ -3,7 +3,8 @@
 
 services:
   grafana:
-    image: grafana/grafana
+    build:
+      context: grafana-oss
     container_name: docker-grafana-${GF_VERSION}_${PROJECT_NAME}
     restart: unless-stopped
     ports:

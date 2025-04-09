@@ -142,20 +142,20 @@ goto end
     echo GF_VERSION=%GF_VERSION% >> %CONF_FILE_PATH%
 
     @rem Setting cache directory
-    set TARGET_DIR=%CLI_DIRECTORY%\cache\grafana-data-%GF_VERSION%
+    set TARGET_DIR=%CLI_DIRECTORY%cache\grafana-data-%GF_VERSION%
     IF NOT EXIST %TARGET_DIR% (
         mkdir %TARGET_DIR%
     )
     echo GF_DATA_VOLUME=%TARGET_DIR% >> %CONF_FILE_PATH%
 
     @rem Setting shell directory
-    echo GF_SHELL_VOLUME=%CLI_DIRECTORY%\shell >> %CONF_FILE_PATH%
+    echo GF_SHELL_VOLUME=%CLI_DIRECTORY%shell >> %CONF_FILE_PATH%
 
     @rem Setting configuration directory
-    echo GF_CONFIG_DIR=%CLI_DIRECTORY%\conf\grafana >> %CONF_FILE_PATH%
+    echo GF_CONFIG_DIR=%CLI_DIRECTORY%conf\grafana >> %CONF_FILE_PATH%
 
     @rem Setting certs directory
-    set TARGET_DIR=%CLI_DIRECTORY%\cache\certs
+    set TARGET_DIR=%CLI_DIRECTORY%cache\certs
     IF NOT EXIST %TARGET_DIR% (
         mkdir %TARGET_DIR%
     )
