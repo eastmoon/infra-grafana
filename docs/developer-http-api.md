@@ -144,3 +144,23 @@ Grafana 的設計中，用戶 ( User ) 與服務帳戶 ( Service Account ) 是�
     - 使用 ```api/short-urls``` 將儀表板的 url 內容轉為短 URL
 
 相關指令可在 ```grafana.bat into``` 後執行 ```bash api db <command>``` 來測試，或執行 ```bash test-dashboard-*.sh``` 等諸多範本；範例僅針對主要介面操作提供範本，其他文獻內容則依此設計延伸與修改。
+
+新增儀表板時若要採用 template，其 template 來源為在儀表板中選擇 ```Export -> Export as JSON```，或經由驗證命令的 ```api db op info``` 取得資訊中的 ```dashboard``` 區塊內容。
+
+需注意，取得後的資料需將屬性 ```id```、```uid``` 設為 null，屬性 ```title``` 改為 ```{DB_NAME}``` 或任何便於系統替換的字樣，panels 中的 datasource 物件其屬性 ```uid``` 也需改為 ```{DS_UID_X}``` 或任何便於系統替換的字樣。
+
+## 資料源
+
++ [Data source API](https://grafana.com/docs/grafana/latest/developers/http_api/data_source/)
+    - [Check data source health](https://grafana.com/docs/grafana/latest/developers/http_api/data_source/#check-data-source-health)
+    - [Query a data source](https://grafana.com/docs/grafana/latest/developers/http_api/data_source/#query-a-data-source)
+
++ 使用 ```/api/datasources``` 的 GET 取得全部資料源、POST 建立新資料源
++ 使用 ```/api/datasources/uid/:id``` 的 GET、PUT、DELETE 方式對指定 UID 的資料源操作
++ 使用 ```/api/datasources/name/:name``` 的 GET、PUT、DELETE 方式對指定 NAME 的資料源操作
+
+相關指令可在 ```grafana.bat into``` 後執行 ```bash api ds <command>``` 來測試，或執行 ```bash test-datasource.sh``` 範本；範例僅針對主要介面操作提供範本，其他文獻內容則依此設計延伸與修改。
+
+新增資料源時若要採用 template，其 template 來源由驗證命令的 ```api ds info``` 取得資訊。
+
+需注意，取得後的資料需將屬性 ```id```、```uid```、```orgId``` 設為 null，屬性 ```name``` 改為 ```{DS_NAME}``` 或任何便於系統替換的字樣。

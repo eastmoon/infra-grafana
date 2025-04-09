@@ -67,7 +67,11 @@ grafana into
 
 ### [Dashboards](https://grafana.com/docs/grafana/latest/dashboards/?pg=hp&plcmt=lt-box-dashboards)
 
-詳細文獻整理參閱 [Dashboards and Panels](./docs/dashboards-and-panels.md)，範本操作參考 HTTP API 文獻的儀表板。
+詳細文獻整理參閱 [Dashboards and Panels](./docs/dashboards-and-panels.md)，範本操作參考 HTTP API 文獻的[儀表板](./docs/developer-http-api.md#儀表板)。
+
+### [Data Sources](https://grafana.com/docs/grafana/latest/datasources/)
+
+詳細文獻整理參閱 [Data Sources](./docs/datasources.md)，範本操作參考 HTTP API 文獻的[資料源](./docs/developer-http-api.md#資料源)。
 
 ### [Plugins](https://grafana.com/docs/grafana/latest/administration/plugin-management/?pg=hp&plcmt=lt-box-plugins)
 
