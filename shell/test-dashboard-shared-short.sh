@@ -6,20 +6,20 @@ api() {
 echo "----- Dashboard shared short URL operation -----"
 echo "==== get folder uid ===="
 ftitle=demo-folder
-if [ $(api dashboard folder ls | grep ${ftitle} | wc -l) -eq 0 ]; then
-    api dashboard folder create --title=${ftitle}
+if [ $(api db folder ls | grep ${ftitle} | wc -l) -eq 0 ]; then
+    api db folder create --title=${ftitle}
 fi
-fuid=$(api dashboard folder ls | grep ${ftitle} | tr ',' '\n' | awk '$0 ~ /"uid"/ { split( $0, a, ":" ); print(a[2]) }' | sed 's/\"//g')
+fuid=$(api db folder ls | grep ${ftitle} | tr ',' '\n' | awk '$0 ~ /"uid"/ { split( $0, a, ":" ); print(a[2]) }' | sed 's/\"//g')
 echo "==== get shared dashboard uid ===="
 dtitle=demo-shared-dashboard
 template=${PWD}/db.d/demo-dashboard.json
-if [ $(api dashboard op search --db | grep ${dtitle} | wc -l) -eq 0 ]; then
-    api dashboard op create --title=${dtitle} --template=${template} --fuid=${fuid} --msg=new-dashboard
+if [ $(api db op search --db | grep ${dtitle} | wc -l) -eq 0 ]; then
+    api db op create --title=${dtitle} --template=${template} --fuid=${fuid} --msg=new-dashboard
 fi
-duid=$(api dashboard op search --db | grep ${dtitle} | tr ',' '\n' | awk '$0 ~ /"uid"/ { split( $0, a, ":" ); print(a[2]) }' | sed 's/\"//g')
+duid=$(api db op search --db | grep ${dtitle} | tr ',' '\n' | awk '$0 ~ /"uid"/ { split( $0, a, ":" ); print(a[2]) }' | sed 's/\"//g')
 echo "==== dashboard information ===="
 echo ${dtitle} : ${duid}
-url=$(api dashboard op info --uid=${duid} | tr ',' '\n' | awk '$0 ~ /"url"/ { split( $0, a, ":" ); print(a[2]) }' | sed 's/\"//g')
+url=$(api db op info --uid=${duid} | tr ',' '\n' | awk '$0 ~ /"url"/ { split( $0, a, ":" ); print(a[2]) }' | sed 's/\"//g')
 echo "==== get short url ===="
 echo ${url}
-api dashboard shared short --url=${url}
+api db shared short --url=${url}
